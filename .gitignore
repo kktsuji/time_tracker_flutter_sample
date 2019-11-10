@@ -208,3 +208,4 @@ fabric.properties
 # End of https://www.gitignore.io/api/androidstudio
 .idea/
 .metadata
+android/app/google-services.json
