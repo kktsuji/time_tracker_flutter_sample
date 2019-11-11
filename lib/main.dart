@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       home: LandingPage(
-        auth: Auth(),
+        auth: Auth(),  // ここで実装クラスをインスタンス化して渡してんのか
       ),
     );
   }
