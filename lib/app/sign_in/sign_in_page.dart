@@ -5,15 +5,17 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
 
-  SignInPage({@required this.auth, @required this.onSignIn});  // コンストラクタで onSingIn を要求
-  final Function(User) onSignIn;  // 内容は定義してないから、コンストラクタに関数を渡す
+  SignInPage({@required this.auth});
+//  SignInPage({@required this.auth, @required this.onSignIn});  // コンストラクタで onSingIn を要求
+//  final Function(User) onSignIn;  // 内容は定義してないから、コンストラクタに関数を渡す
   final AuthBase auth;
 
   Future<void> _signInAnonymously() async {
     try {
-      User user = await auth.signInAnonymously();
-      onSignIn(user);
-      //print('${authResult.user.uid}');
+      auth.signInAnonymously();
+//      User user = await auth.signInAnonymously();
+//      onSignIn(user);
+//      //print('${authResult.user.uid}');
     } catch (e) {
       print(e.toString());
     }
