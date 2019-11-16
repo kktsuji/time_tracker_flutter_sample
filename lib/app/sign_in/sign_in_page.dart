@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
@@ -14,7 +15,8 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+//      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context);
       auth.signInAnonymously();
 //      User user = await auth.signInAnonymously();
 //      onSignIn(user);
@@ -26,8 +28,8 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
-      auth.signInWithGoogle();
+//      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context);auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
     }
@@ -35,7 +37,8 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+//      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context);
       auth.signInWithFacebook();
     } catch (e) {
       print(e.toString());
