@@ -2,24 +2,27 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
-class SignInBloc {
-  SignInBloc({@required this.auth});
+class SignInManager {
+  SignInManager({@required this.auth, @required this.isLoading});
   final AuthBase auth;
-  final StreamController<bool> _isLoadingController = StreamController<bool>();
-  Stream<bool> get isLoadingStream => _isLoadingController.stream;
-
-  void dispose() {
-    _isLoadingController.close();
-  }
-
-  void _setIsLoading(bool isLoading) => _isLoadingController.add(isLoading);
+  final ValueNotifier<bool> isLoading;
+//  final StreamController<bool> _isLoadingController = StreamController<bool>();
+//  Stream<bool> get isLoadingStream => _isLoadingController.stream;
+//
+//  void dispose() {
+//    _isLoadingController.close();
+//  }
+//
+//  void _setIsLoading(bool isLoading) => _isLoadingController.add(isLoading);
 
   Future<User> _signIn(Future<User> Function() signInMethod) async {
     try{
-      _setIsLoading(true);
+//      _setIsLoading(true);
+      isLoading.value = true;
       return await signInMethod();
     } catch (e) {
-      _setIsLoading(false);
+//      _setIsLoading(false);
+      isLoading.value = false;
       rethrow;
     }
     // AndroidでAnonymousログインしたときにエラーになることがある
