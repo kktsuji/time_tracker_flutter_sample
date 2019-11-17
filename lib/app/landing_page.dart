@@ -29,11 +29,12 @@ class LandingPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           User user = snapshot.data;
           if (user == null) {
-            return SignInPage(
-              //auth: auth, // ああ、なるほどここで渡すから共通のクラスのインスタンスを使えるのか
-//              auth: widget.auth, // ああ、なるほどここで渡すから共通のクラスのインスタンスを使えるのか
-//              onSignIn: _updateUser, // コンストラクタに関数 _updateUser を渡している
-            );
+//            return SignInPage(
+//              //auth: auth, // ああ、なるほどここで渡すから共通のクラスのインスタンスを使えるのか
+////              auth: widget.auth, // ああ、なるほどここで渡すから共通のクラスのインスタンスを使えるのか
+////              onSignIn: _updateUser, // コンストラクタに関数 _updateUser を渡している
+//            );
+              return SignInPage.create(context);
           }
           return HomePage(
             //auth: auth,
