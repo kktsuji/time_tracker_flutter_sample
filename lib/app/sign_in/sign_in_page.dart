@@ -9,27 +9,34 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 import 'package:time_tracker_flutter_course/services/auth_provider.dart';
 import 'package:flutter/services.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
 
 //  SignInPage({@required this.auth});
 //  SignInPage({@required this.auth, @required this.onSignIn});  // コンストラクタで onSingIn を要求
 //  final Function(User) onSignIn;  // 内容は定義してないから、コンストラクタに関数を渡す
 //  final AuthBase auth;
 
+  const SignInPage({Key key, @required this.bloc}) : super(key: key);
+  final SignInBloc bloc;
+
   static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context);
     return Provider<SignInBloc>(
-      builder: (_) => SignInBloc(),
-      child: SignInPage(),
+      builder: (_) => SignInBloc(auth: auth),
+      dispose: (context, bloc) => bloc.dispose(),
+      child: Consumer<SignInBloc>(
+        builder: (context, bloc, _) => SignInPage(bloc: bloc),
+      ),
     );
   }
 
-  @override
-  _SignInPageState createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-
-//  bool _isLoading = false;
+//  @override
+//  _SignInPageState createState() => _SignInPageState();
+//}
+//
+//class _SignInPageState extends State<SignInPage> {
+//
+////  bool _isLoading = false;
 
   void _showSignInError(BuildContext context, PlatformException exception) {
     PlatformExceptionAlertDialog(
@@ -39,13 +46,14 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<void> _signInAnonymously(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context);
+//    final bloc = Provider.of<SignInBloc>(context);
     try {
-        bloc.setIsLoading(true);
+//        bloc.setIsLoading(true);
 //      setState(()  => _isLoading = true);
 //      final auth = AuthProvider.of(context);
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signInAnonymously();
+//      final auth = Provider.of<AuthBase>(context);
+//      await auth.signInAnonymously();
+      await bloc.signInAnonymously();
 //      User user = await auth.signInAnonymously();
 //      onSignIn(user);
 //      //print('${authResult.user.uid}');
@@ -53,46 +61,51 @@ class _SignInPageState extends State<SignInPage> {
       if (e.code != 'ERROR_ABORTED_BU_USER') {
         _showSignInError(context, e);
       }
-    } finally {
-//      setState(()  => _isLoading = false);
-      bloc.setIsLoading(false);
     }
+//    } finally {
+////      setState(()  => _isLoading = false);
+//      bloc.setIsLoading(false);
+//    }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context);
+//    final bloc = Provider.of<SignInBloc>(context);
     try {
-      bloc.setIsLoading(true);
+//      bloc.setIsLoading(true);
 //      setState(()  => _isLoading = true);
 //      final auth = AuthProvider.of(context);
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signInWithGoogle();
+//      final auth = Provider.of<AuthBase>(context);
+//      await auth.signInWithGoogle();
+      await bloc.signInWithGoogle();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BU_USER') {
         _showSignInError(context, e);
       }
-    } finally {
-//      setState(()  => _isLoading = false);
-      bloc.setIsLoading(false);
     }
+//    } finally {
+////      setState(()  => _isLoading = false);
+//      bloc.setIsLoading(false);
+//    }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context);
+//    final bloc = Provider.of<SignInBloc>(context);
     try {
-      bloc.setIsLoading(true);
+//      bloc.setIsLoading(true);
 //      setState(()  => _isLoading = true);
 //      final auth = AuthProvider.of(context);
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signInWithFacebook();
+//      final auth = Provider.of<AuthBase>(context);
+//      await auth.signInWithFacebook();
+      await bloc.signInWithFacebook();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BU_USER') {
         _showSignInError(context, e);
       }
-    } finally {
-//      setState(()  => _isLoading = false);
-      bloc.setIsLoading(false);
     }
+//    } finally {
+////      setState(()  => _isLoading = false);
+//      bloc.setIsLoading(false);
+//    }
   }
 
   void _signInWithEmail(BuildContext context) {
@@ -106,7 +119,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<SignInBloc>(context);
+//    final bloc = Provider.of<SignInBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Time Tracker'),
