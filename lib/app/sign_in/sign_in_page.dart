@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
+import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 import 'package:time_tracker_flutter_course/services/auth_provider.dart';
+import 'package:flutter/services.dart';
 
 class SignInPage extends StatelessWidget {
 
@@ -13,25 +15,37 @@ class SignInPage extends StatelessWidget {
 //  final Function(User) onSignIn;  // 内容は定義してないから、コンストラクタに関数を渡す
 //  final AuthBase auth;
 
+  void _showSignInError(BuildContext context, PlatformException exception) {
+    PlatformExceptionAlertDialog(
+      title: 'Sign in failed',
+      exception: exception,
+    ).show(context);
+  }
+
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
 //      final auth = AuthProvider.of(context);
       final auth = Provider.of<AuthBase>(context);
-      auth.signInAnonymously();
+      await auth.signInAnonymously();
 //      User user = await auth.signInAnonymously();
 //      onSignIn(user);
 //      //print('${authResult.user.uid}');
-    } catch (e) {
-      print(e.toString());
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BU_USER') {
+        _showSignInError(context, e);
+      }
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
 //      final auth = AuthProvider.of(context);
-      final auth = Provider.of<AuthBase>(context);auth.signInWithGoogle();
-    } catch (e) {
-      print(e.toString());
+      final auth = Provider.of<AuthBase>(context);
+      await auth.signInWithGoogle();
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BU_USER') {
+        _showSignInError(context, e);
+      }
     }
   }
 
@@ -39,9 +53,11 @@ class SignInPage extends StatelessWidget {
     try {
 //      final auth = AuthProvider.of(context);
       final auth = Provider.of<AuthBase>(context);
-      auth.signInWithFacebook();
-    } catch (e) {
-      print(e.toString());
+      await auth.signInWithFacebook();
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BU_USER') {
+        _showSignInError(context, e);
+      }
     }
   }
 
