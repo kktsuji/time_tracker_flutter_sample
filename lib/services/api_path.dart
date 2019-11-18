@@ -1,4 +1,4 @@
 
 class APIPath {
-  static String job(String uid, String jobId) => '/users/$uid/jobs/4jobId';
+  static String job(String uid, String jobId) => '/users/$uid/jobs/$jobId';
 }

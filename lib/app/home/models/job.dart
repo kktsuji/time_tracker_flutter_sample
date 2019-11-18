@@ -11,7 +11,7 @@ class Job {
     return {
       'name': name,
       'ratePerHour': ratePerHour,
-    }
+    };
   }
 
 }
