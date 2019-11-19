@@ -11,7 +11,7 @@ class Job {
     if (data == null) {
       return null;
     }
-    final String name = data['data'];
+    final String name = data['name'];
     final int ratePerHour = data['ratePerHour'];
     return Job(
       name: name,

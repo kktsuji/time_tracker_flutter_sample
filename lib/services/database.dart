@@ -15,7 +15,7 @@ class FirestoreDatabase implements Database {
 
   final _service = FirestoreService.instance;
 
-  Future<void> createJob(Job job) async => _service.setData(
+  Future<void> createJob(Job job) async => await _service.setData(
         path: APIPath.job(uid, 'job_abc'),
         data: job.toMap(),
       );
