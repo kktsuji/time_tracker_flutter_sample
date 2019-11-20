@@ -7,16 +7,24 @@ import 'package:time_tracker_flutter_course/services/database.dart';
 import 'package:flutter/services.dart';
 
 class EditJobPage extends StatefulWidget {
-  const EditJobPage({Key key, @required this.database, this.job}) : super(key: key);
+  const EditJobPage({Key key, @required this.database, this.job})
+      : super(key: key);
   final Database database;
   final Job job;
 
-  static Future<void> show(BuildContext context, {Job job}) async {
-    final database = Provider.of<Database>(context);
+  static Future<void> show(
+    BuildContext context, {
+    Database database,
+    Job job,
+  }) async {
+//    final database = Provider.of<Database>(context);
     await Navigator.of(context).push(
       MaterialPageRoute(
         // ここでコンストラクタ呼べるのな！なんか面白いなこの順番
-        builder: (context) => EditJobPage(database: database, job: job,),
+        builder: (context) => EditJobPage(
+          database: database,
+          job: job,
+        ),
         fullscreenDialog: true,
       ),
     );
@@ -31,7 +39,6 @@ class _EditJobPageState extends State<EditJobPage> {
 
   String _name;
   int _ratePerHour;
-
 
   @override
   void initState() {
@@ -139,7 +146,7 @@ class _EditJobPageState extends State<EditJobPage> {
       ),
       TextFormField(
         decoration: InputDecoration(labelText: 'Rate per hour'),
-        initialValue: _ratePerHour !=  null ? '$_ratePerHour' : null,
+        initialValue: _ratePerHour != null ? '$_ratePerHour' : null,
         keyboardType: TextInputType.numberWithOptions(
           signed: false,
           decimal: false,
