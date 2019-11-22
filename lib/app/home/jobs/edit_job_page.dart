@@ -18,7 +18,7 @@ class EditJobPage extends StatefulWidget {
     Job job,
   }) async {
 //    final database = Provider.of<Database>(context);
-    await Navigator.of(context).push(
+    await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
         // ここでコンストラクタ呼べるのな！なんか面白いなこの順番
         builder: (context) => EditJobPage(
