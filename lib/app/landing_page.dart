@@ -37,12 +37,15 @@ class LandingPage extends StatelessWidget {
 //            );
               return SignInPage.create(context);
           }
-          return Provider<Database>(
-            builder: (_) => FirestoreDatabase(uid: user.uid),
-            child: HomePage(
-              //auth: auth,
+          return Provider<User>.value(
+            value: user,
+            child: Provider<Database>(
+              builder: (_) => FirestoreDatabase(uid: user.uid),
+              child: HomePage(
+                //auth: auth,
 //            auth: widget.auth,
 //            onSignOut: () => _updateUser(null), // 同じく渡している
+              ),
             ),
           );
         } else {
